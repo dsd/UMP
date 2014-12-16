@@ -160,11 +160,10 @@ void _ump_uku_unlock(_ump_uk_unlock_s *args)
 	ump_driver_ioctl(args->ctx, UMP_IOC_UNLOCK, args);
 }
 
-#ifdef ANDROID
+#if (defined(HAVE_ANDROID_OS) && MALI_ANDROID_API < 21)
 /* Android does not provide a mmap64 function, it is implemented directly here
  * using the __mmap2 syscall */
 extern void *__mmap2(void *, size_t, int, int, int, size_t);
-
 static void *mmap64(void *addr, size_t size, int prot, int flags, int fd, off64_t offset)
 {
 	return __mmap2(addr, size, prot, flags, fd, offset / sysconf(_SC_PAGE_SIZE));
