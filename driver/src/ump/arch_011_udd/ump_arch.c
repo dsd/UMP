@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2011 ARM Limited. All rights reserved.
+ * Copyright (C) 2010-2012 ARM Limited. All rights reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,7 +31,7 @@
 void *ump_uk_ctx = NULL;
 
 /** Reference counting of ump_arch_open() and ump_arch_close(). */
-volatile static int ump_ref_count = 0;
+static volatile int ump_ref_count = 0;
 
 /** Lock for critical section in open/close */
 _ump_osu_lock_t * ump_lock = NULL;

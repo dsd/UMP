@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2011 ARM Limited. All rights reserved.
+ * Copyright (C) 2010-2012 ARM Limited. All rights reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -143,14 +143,14 @@ typedef enum
 	_UMP_OSU_LOCKFLAG_DEFAULT = 0, /**< Default lock type. */
 	/** @enum _ump_osu_lock_flags_t
 	 *
-	 * Flags from 0x8000--0x1 are RESERVED for Kernel-mode
+	 * Flags from 0x0--0x8000 are RESERVED for Kernel-mode
 	 */
 	_UMP_OSU_LOCKFLAG_ANYUNLOCK = 0x10000, /**< Mutex that guarantees that any thread can unlock it when locked. Otherwise, this will not be possible. */
 	/** @enum _ump_osu_lock_flags_t
 	 *
-	 * Flags from 0x80000000 are RESERVED for User-mode
+	 * Flags from 0x10000 are RESERVED for User-mode
 	 */
-	_UMP_OSU_LOCKFLAG_STATIC = 0x80000000, /* Flag in OSU reserved range to identify lock as a statically initialized lock */
+	_UMP_OSU_LOCKFLAG_STATIC = 0x20000, /* Flag in OSU reserved range to identify lock as a statically initialized lock */
 
  } _ump_osu_lock_flags_t;
 

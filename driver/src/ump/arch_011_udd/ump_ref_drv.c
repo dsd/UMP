@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2011 ARM Limited. All rights reserved.
+ * Copyright (C) 2010-2012 ARM Limited. All rights reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -53,10 +53,10 @@ UMP_API_EXPORT int ump_cpu_msync_now(ump_handle memh, ump_cpu_msync_op op, void*
 	if ((UMP_MSYNC_READOUT_CACHE_ENABLED!=op) && (0 == mem->is_cached) ) return 0;
 
 	UMP_DEBUG_ASSERT(0 < (((ump_mem*)mem)->ref_count), ("Reference count too low"));
-	UMP_DEBUG_ASSERT((size>=0) && (size <= ((ump_mem*)mem)->size), ("Memory size of passed handle too low"));
+	UMP_DEBUG_ASSERT((size>=0) && (size <= (int)((ump_mem*)mem)->size), ("Memory size of passed handle too low"));
 	UMP_DEBUG_ASSERT(NULL != ((ump_mem*)mem)->mapped_mem, ("Error in mapping pointer (not mapped)"));
 
-	if (size > mem->size) size = mem->size;
+	if (size > (int)mem->size) size = mem->size;
 
 	mem->is_cached = ump_arch_msync(mem->secure_id, mem->mapped_mem, mem->cookie, address, size, op);
 	return mem->is_cached ;

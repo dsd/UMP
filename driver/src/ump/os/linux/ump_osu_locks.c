@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2011 ARM Limited. All rights reserved.
+ * Copyright (C) 2010-2012 ARM Limited. All rights reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -165,6 +165,8 @@ _ump_osu_lock_t *_ump_osu_lock_init( _ump_osu_lock_flags_t flags, u32 initial, u
 	_ump_osu_lock_t * lock;
 	pthread_mutexattr_t mutex_attributes;
 
+	UMP_IGNORE(order); /* order isn't implemented yet, for now callers should set it to zero. */
+
 	/* Validate parameters: */
 	/* Flags acceptable */
 	UMP_DEBUG_ASSERT( 0 == ( flags & ~( _UMP_OSU_LOCKFLAG_ANYUNLOCK)),
@@ -260,8 +262,8 @@ _ump_osu_errcode_t _ump_osu_lock_timed_wait( _ump_osu_lock_t *lock, _ump_osu_loc
 
 	tv.tv_usec += timeout;
 
-#define UMP_USECS_PER_SECOND 1000000ULL
-#define UMP_NANOSECS_PER_USEC 1000ULL
+#define UMP_USECS_PER_SECOND 1000000LL
+#define UMP_NANOSECS_PER_USEC 1000LL
 
 	/* did we overflow a second in the usec part? */
 	while (tv.tv_usec >= UMP_USECS_PER_SECOND)

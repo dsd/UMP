@@ -1,0 +1,52 @@
+The contents of this transaction was created by Padraic Garvey
+of ARM on 28-Feb-2012.
+
+It contains the ARM data versions listed below.
+
+This data, unless otherwise stated, is ARM Proprietary and access to it
+is subject to the agreements indicated below.
+
+If you experience problems with this data, please contact ARM support
+quoting transaction reference <329296>.
+
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+- DX910-SW-99002-r2p4-02rel0
+  GPLv2 Linux Device Driver Source Code
+  DEV Release
+  Entitled via internal access
+
+- DX910-SW-99003-r2p4-02rel0
+  MIT Linux User Space Driver Source Code
+  DEV Release
+  Entitled via internal access
+
+- DX910-SW-99005-r2p4-02rel0
+  Apache Linux User Space Driver Source Co
+  DEV Release
+  Entitled via internal access
+
+- DX910-SW-99006-r2p4-02rel0
+  Apache UMP User Space Driver Source Code
+  DEV Release
+  Entitled via internal access
+
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+In addition to the data versions listed above, this transaction contains
+two additional files at the top level.
+
+The first is this file, ARM_DELIVERY_329296.TXT, which is the delivery
+note.
+
+The second is ARM_MANIFEST_329296.TXT which contains a manifest of all the
+files included in this transaction, together with their checksums.
+
+The checksums provided are calculated using the RSA Data Security, Inc.
+MD5 Message-Digest Algorithm.
+
+The checksums can be used to verify the integrity of this data using the
+"md5sum" tool (which is part of the GNU "textutils" package) by running:
+
+  % md5sum --check ARM_MANIFEST_329296.TXT
+
