@@ -77,7 +77,7 @@
  *  The macro UMP_FUNCTION evaluates to the name of the function enclosing
  *  this macro's usage, or "<unknown>" if not supported.
  */
-#if (defined(__SYMBIAN32__) && defined(__ARMCC__)) || defined(_MSC_VER)
+#if defined(_MSC_VER)
 #   define UMP_FUNCTION __FUNCTION__
 #elif __STDC__  && __STDC_VERSION__ >= 199901L
 #   define UMP_FUNCTION __FUNCTION__

@@ -167,7 +167,7 @@ extern void *__mmap2(void *, size_t, int, int, int, size_t);
 
 static void *mmap64(void *addr, size_t size, int prot, int flags, int fd, off64_t offset)
 {
-        return __mmap2(addr, size, prot, flags, fd, offset / sysconf(_SC_PAGE_SIZE));
+	return __mmap2(addr, size, prot, flags, fd, offset / sysconf(_SC_PAGE_SIZE));
 }
 #endif
 
@@ -197,7 +197,7 @@ int _ump_uku_map_mem(_ump_uk_map_mem_s *args)
 	}
 
 	args->mapping = mmap64(NULL, args->size, PROT_READ | PROT_WRITE, flags,
-			(int)args->ctx, (off64_t)args->secure_id * sysconf(_SC_PAGE_SIZE));
+	                       (int)args->ctx, (off64_t)args->secure_id * sysconf(_SC_PAGE_SIZE));
 
 	if (MAP_FAILED == args->mapping)
 	{
