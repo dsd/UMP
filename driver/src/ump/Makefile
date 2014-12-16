@@ -30,9 +30,12 @@ include ump.mak
 UMP_OBJS := $(UMP_SRCS:.c=.o)
 
 libUMP.so: $(UMP_OBJS)
-	arm-none-linux-gnueabi-gcc -shared -o $@ $(UMP_OBJS) $(CFLAGS)
+	$(TARGET_CC) -shared -o $@ $(UMP_OBJS) $(CFLAGS)
 libUMP.a: $(UMP_OBJS)
 	$(TARGET_AR) rcs $@ $(UMP_OBJS)
+
+.DEFAULT_GOAL = all
+all: libUMP.so libUMP.a
 
 clean:
 	-rm -f $(UMP_OBJS) libUMP.so libUMP.a

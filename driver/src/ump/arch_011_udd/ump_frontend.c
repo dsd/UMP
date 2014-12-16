@@ -27,17 +27,17 @@
 #include <ump/ump_debug.h>
 #include <ump/ump_osu.h>
 
-ump_result ump_open(void)
+UMP_API_EXPORT ump_result ump_open(void)
 {
 	return ump_arch_open();
 }
 
-void ump_close(void)
+UMP_API_EXPORT void ump_close(void)
 {
 	ump_arch_close();
 }
 
-ump_secure_id ump_secure_id_get(ump_handle memh)
+UMP_API_EXPORT ump_secure_id ump_secure_id_get(ump_handle memh)
 {
 	ump_mem * mem = (ump_mem*)memh;
 
@@ -49,7 +49,7 @@ ump_secure_id ump_secure_id_get(ump_handle memh)
 	return mem->secure_id;
 }
 
-ump_handle ump_handle_create_from_secure_id(ump_secure_id secure_id)
+UMP_API_EXPORT ump_handle ump_handle_create_from_secure_id(ump_secure_id secure_id)
 {
 	unsigned long size;
 
@@ -97,7 +97,7 @@ ump_handle ump_handle_create_from_secure_id(ump_secure_id secure_id)
 	return UMP_INVALID_MEMORY_HANDLE;
 }
 
-unsigned long ump_size_get(ump_handle memh)
+UMP_API_EXPORT unsigned long ump_size_get(ump_handle memh)
 {
 	ump_mem * mem = (ump_mem*)memh;
 
@@ -109,7 +109,7 @@ unsigned long ump_size_get(ump_handle memh)
 	return mem->size;
 }
 
-void ump_read(void *dst, ump_handle srch, unsigned long offset, unsigned long length)
+UMP_API_EXPORT void ump_read(void *dst, ump_handle srch, unsigned long offset, unsigned long length)
 {
 	ump_mem * src = (ump_mem*)srch;
 
@@ -123,7 +123,7 @@ void ump_read(void *dst, ump_handle srch, unsigned long offset, unsigned long le
 	_ump_osu_memcpy(dst,(char*)(src->mapped_mem) + offset, length);
 }
 
-void ump_write(ump_handle dsth, unsigned long offset, const void *src, unsigned long length)
+UMP_API_EXPORT void ump_write(ump_handle dsth, unsigned long offset, const void *src, unsigned long length)
 {
 	ump_mem * dst = (ump_mem*)dsth;
 
@@ -139,7 +139,7 @@ void ump_write(ump_handle dsth, unsigned long offset, const void *src, unsigned 
 
 
 
-void* ump_mapped_pointer_get(ump_handle memh)
+UMP_API_EXPORT void* ump_mapped_pointer_get(ump_handle memh)
 {
 	ump_mem * mem = (ump_mem*)memh;
 
@@ -154,7 +154,7 @@ void* ump_mapped_pointer_get(ump_handle memh)
 
 
 
-void ump_mapped_pointer_release(ump_handle memh)
+UMP_API_EXPORT void ump_mapped_pointer_release(ump_handle memh)
 {
 	UMP_DEBUG_ASSERT(UMP_INVALID_MEMORY_HANDLE != memh, ("Handle is invalid"));
 	UMP_DEBUG_ASSERT(UMP_INVALID_SECURE_ID != ((ump_mem*)memh)->secure_id, ("Secure ID is inavlid"));
@@ -167,7 +167,7 @@ void ump_mapped_pointer_release(ump_handle memh)
 
 
 
-void ump_reference_add(ump_handle memh)
+UMP_API_EXPORT void ump_reference_add(ump_handle memh)
 {
 	ump_mem * mem = (ump_mem*)memh;
 
@@ -183,7 +183,7 @@ void ump_reference_add(ump_handle memh)
 
 
 
-void ump_reference_release(ump_handle memh)
+UMP_API_EXPORT void ump_reference_release(ump_handle memh)
 {
 	ump_mem * mem = (ump_mem*)memh;
 

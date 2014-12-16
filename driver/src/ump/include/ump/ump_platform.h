@@ -42,7 +42,23 @@
 
 #else
 
-#define UMP_API_EXPORT
+#if defined(__GNUC__)
+#if __GNUC__ >= 4
+#	define MALI_VISIBLE  __attribute__ ((visibility ("default")))		/**< Function should be visible from outside the dll */	
+#else
+#	define MALI_VISIBLE
+#endif
+
+#elif defined(__ARMCC_VERSION)
+/* ARMCC specific */
+#	define MALI_VISIBLE  __declspec(dllexport)
+
+#else
+#	define MALI_VISIBLE
+
+#endif
+
+#define UMP_API_EXPORT MALI_VISIBLE
 
 #endif
 
