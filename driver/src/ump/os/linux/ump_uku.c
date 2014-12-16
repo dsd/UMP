@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2013 ARM Limited. All rights reserved.
+ * Copyright (C) 2010-2014 ARM Limited. All rights reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +18,8 @@
  * @file ump_uku.c
  * File implements the user side of the user-kernel interface
  */
+
+#define _LARGEFILE64_SOURCE
 
 #include "../ump_uku.h"
 #include <stdio.h>
@@ -158,6 +160,17 @@ void _ump_uku_unlock(_ump_uk_unlock_s *args)
 	ump_driver_ioctl(args->ctx, UMP_IOC_UNLOCK, args);
 }
 
+#ifdef ANDROID
+/* Android does not provide a mmap64 function, it is implemented directly here
+ * using the __mmap2 syscall */
+extern void *__mmap2(void *, size_t, int, int, int, size_t);
+
+static void *mmap64(void *addr, size_t size, int prot, int flags, int fd, off64_t offset)
+{
+        return __mmap2(addr, size, prot, flags, fd, offset / sysconf(_SC_PAGE_SIZE));
+}
+#endif
+
 int _ump_uku_map_mem(_ump_uk_map_mem_s *args)
 {
 	int flags;
@@ -175,17 +188,20 @@ int _ump_uku_map_mem(_ump_uk_map_mem_s *args)
 		args->is_cached = 0;
 	}
 
-	/* If we want the Caching to be enabled we set the flags to be PRIVATE. The UMP DD reads this and do proper handling
-	   Note: this enforces the user to use proper invalidation*/
+	/* If we want the Caching to be enabled we set the flags to be PRIVATE.
+	 * The UMP DD reads this and do proper handling
+	 * Note: this enforces the user to use proper invalidation */
 	if (args->is_cached)
 	{
 		flags = MAP_PRIVATE;
 	}
 
-	args->mapping = mmap(NULL, args->size, PROT_READ | PROT_WRITE , flags , (int)args->ctx, (off_t)args->secure_id * sysconf(_SC_PAGE_SIZE));
+	args->mapping = mmap64(NULL, args->size, PROT_READ | PROT_WRITE, flags,
+			(int)args->ctx, (off64_t)args->secure_id * sysconf(_SC_PAGE_SIZE));
 
 	if (MAP_FAILED == args->mapping)
 	{
+		perror("mmap failed");
 		return -1;
 	}
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010, 2012-2013 ARM Limited. All rights reserved.
+ * Copyright (C) 2010, 2012-2014 ARM Limited. All rights reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -39,7 +39,7 @@ extern "C" {
  * The 16bit integer is stored twice in a 32bit integer
  * So for version 1 the value would be 0x00010001
  */
-#define UMP_IOCTL_API_VERSION MAKE_VERSION_ID(2)
+#define UMP_IOCTL_API_VERSION MAKE_VERSION_ID(3)
 
 typedef enum
 {
